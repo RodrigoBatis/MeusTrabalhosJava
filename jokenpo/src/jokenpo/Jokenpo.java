@@ -10,12 +10,8 @@ public class Jokenpo {
 		Scanner ler = new Scanner(System.in);
 		Random sorteio = new Random();
 		
-		int jogador, maquina, quantidadeRodadas, contador;
+		int jogador, maquina, quantidadeRodadas, contador, rodadas;
 		int  vitoriaJogador, vitoriaMaquina;
-		vitoriaJogador = 0;
-		vitoriaMaquina = 0;
-		contador = 0;
-		maquina = sorteio.nextInt(3) + 1;
 		String escolha = "S";
 		
 		System.out.println("-------------------------------------------------");
@@ -23,8 +19,7 @@ public class Jokenpo {
 		System.out.println("-------------------------------------------------");
 		
 		System.out.println("");
-		System.out.print("Quantas partidas: ");
-		quantidadeRodadas = ler.nextInt();
+		
 		System.out.println("");
 		System.out.println("-------------------------------------------------");
 		System.out.println(" 1 - Pedra");
@@ -34,18 +29,29 @@ public class Jokenpo {
 		System.out.println("");
 		
 		while (escolha.equalsIgnoreCase("s")) {
-		
+			
+			System.out.println("-------------------------------------------------");
+			
+			System.out.print("Quantas partidas: ");
+			quantidadeRodadas = ler.nextInt();
+			vitoriaJogador = 0;
+			vitoriaMaquina = 0;
+			contador = 0;
+			maquina = sorteio.nextInt(3) + 1;
+			System.out.println("-------------------------------------------------");
+			
 		while (contador < quantidadeRodadas) {
-			while (quantidadeRodadas % 2 == 0 || quantidadeRodadas != 3) {
+			while (quantidadeRodadas % 2 == 0 || quantidadeRodadas < 3) {
 				System.out.println("Por favor não digite números pares ou menores que 3!");
 				System.out.println();
 				System.out.print("Digite a quantidade de rodadas: ");
 				quantidadeRodadas = ler.nextInt();
 			}
-			
+			System.out.println("");
+			System.out.println("-------------------------------------------------");
 			System.out.print("Qual sua escolha: ");
 			jogador = ler.nextInt();
-			System.out.println("");
+			System.out.println("-------------------------------------------------");
 			
 			if (jogador == 1) {
 				System.out.println("Sua escolha foi pedra.");
@@ -70,8 +76,9 @@ public class Jokenpo {
 					System.out.println("Computador escolheu tesoura.");
 					System.out.println("");
 				}
+					rodadas = quantidadeRodadas;
 					System.out.println("");
-			while (quantidadeRodadas != 1 && quantidadeRodadas != 2 && quantidadeRodadas != 3) {
+			while (quantidadeRodadas != rodadas) {
 				System.out.println("Escolha um valor de 1 até 3: ");
 				System.out.println("");
 
@@ -113,9 +120,9 @@ public class Jokenpo {
 			System.out.println("");
 		}
 		if (vitoriaJogador > vitoriaMaquina) {
-			System.out.println("Você ganhou meu cria");
+			System.out.println("***** Você ganhou meu cria *****");
 		}else {
-			System.out.println("O computador ganhou");
+			System.out.println("***** O computador ganhou *****");
 		}
 			System.out.println("");
 		
@@ -123,14 +130,15 @@ public class Jokenpo {
 		System.out.print("");
 		escolha= ler.next();
 		
+				
+		}
 		while (!escolha.equalsIgnoreCase("s") && !escolha.equalsIgnoreCase("n")) {
 			System.out.println("Por favor digite S caso queira continuar jogando e N caso não queira jogar mais !!!");
 			System.out.println();
 			escolha = ler.next();
+			
 		}
 		ler.close();
-		
-		}
 	}
 
 }
