@@ -10,7 +10,7 @@ public class Jokenpo {
 		Scanner ler = new Scanner(System.in);
 		Random sorteio = new Random();
 		
-		int jogador, maquina, quantidadeRodadas, contador, rodadas;
+		int jogador, maquina, quantidadeRodadas, contador, rodadas, desempate;
 		int  vitoriaJogador, vitoriaMaquina;
 		String escolha = "S";
 		
@@ -19,6 +19,10 @@ public class Jokenpo {
 		System.out.println("-------------------------------------------------");
 		
 		System.out.println("");
+		
+		System.out.println("-------------------------------------------------");
+		System.out.println("Opções para escolha");
+		System.out.println("-------------------------------------------------");
 		
 		System.out.println("");
 		System.out.println("-------------------------------------------------");
@@ -95,26 +99,21 @@ public class Jokenpo {
 				System.out.println("");
 			}
 			if ((jogador == 1 && maquina == 3) || (jogador == 2 && maquina == 1) || (jogador == 3 && maquina == 2)) {
+				vitoriaJogador = vitoriaJogador + 1;
 				System.out.println("Você ganhou essa rodada!!");
 				System.out.println("");
 			
 			}else if ((jogador == 1 && maquina == 2) || (jogador == 2 && maquina == 3) || (jogador == 3 && maquina == 1)) {
+				vitoriaMaquina = vitoriaMaquina + 1;
 				System.out.println("A maquina ganhou essa rodada!!");
 				System.out.println("");
 				
 			}else {
 				System.out.println("Empatou essa rodada!!");
-			}
-			
-			
-			if ((jogador == 1 && maquina == 3) || (jogador == 2 && maquina == 1) || (jogador == 3 && maquina == 2)) {
-				vitoriaJogador = vitoriaJogador + 1;
-			}else if ((jogador == 1 && maquina == 2) || (jogador == 2 && maquina == 3) || (jogador == 3 && maquina == 1)) {
-				vitoriaMaquina = vitoriaMaquina + 1;
-			}else {
-				System.out.println("Essa rodada deu empate");
-			}
-			
+				
+			}	
+				
+						
 			contador++;
 			
 			System.out.println("");
@@ -141,4 +140,4 @@ public class Jokenpo {
 		ler.close();
 	}
 
-}
+	}
