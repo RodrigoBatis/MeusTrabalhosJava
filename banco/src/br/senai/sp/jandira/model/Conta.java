@@ -9,7 +9,7 @@ public class Conta {
 	private double saldo;
 	private TipoConta tipo;
 	private String numero;
-	public String titular;
+	public Cliente titular;
 	
 	// Metodo Construtor
 	public Conta(String numeroConta) {
