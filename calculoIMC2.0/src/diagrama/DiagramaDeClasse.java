@@ -2,16 +2,11 @@ package diagrama;
 
 public class DiagramaDeClasse {
 
-	public int peso;
-	public double altura;
-	public String status;
-	public double resultado = peso / (altura * altura);
+	public double Altura;
+	public double Peso;
+	public double resultado;
 	
-	public void calculoImc() {
-		System.out.println("Seu IMC é: " + resultado);
-	}
-	
-	public void status() {
-		
-	}
+	public void dividir(){
+	 resultado = (Altura*2)/Peso  ;
+	System.out.println(resultado);}
 }
