@@ -1,18 +1,46 @@
 package br.senai.sp.jandira.model;
 
+import br.senai.sp.jandira.lista.TipoConta;
+
 public class Conta {
 	
 	// Atributos da classe Conta
-	public String numeroAgencia;
+	private String numeroAgencia;
 	private double saldo;
-	public String tipo;
+	private TipoConta tipo;
 	private String numero;
 	public String titular;
 	
-	// Construtores da classe Conta
+	// Metodo Construtor
 	public Conta(String numeroConta) {
+		
 		numero = numeroConta;
 	}
+	
+	// set tipo conta
+	public void setTipo(TipoConta tipo){
+		
+		this.tipo = tipo;
+	}
+	
+	// get tipo conta
+	public TipoConta getTipo() {
+		return tipo;
+	}
+	
+	// set numero agencia
+	public void setNumeroAgencia(String numeroAgencia) {
+			
+		this.numeroAgencia = numeroAgencia;
+	}
+	
+	// get numero agencia
+	public String getNumeroAgencia() {
+		return numeroAgencia; 
+	}
+	
+	
+	
 	
 	// Metodos da classe Conta
 	public void depositar(double valorDeposito) {
@@ -48,14 +76,14 @@ public class Conta {
 			
 	}
 	
-	public void transferir(Conta contaDestino, double valorTransferncia) {
-		boolean resultado = sacar(valorTransferncia);
+	public void transferir(Conta contaDestino, double valorTransferencia) {
+		boolean resultado = sacar(valorTransferencia);
 		
 		if (resultado) {
 			
-			contaDestino.depositar(valorTransferncia);
+			contaDestino.depositar(valorTransferencia);
 			System.out.println("");
-			System.out.println("** Realizando transferência **");
+			System.out.println("** Realizando transferência... **");
 			System.out.println("Transferência realizado com sucesso!!!");
 		}else {
 			System.out.println("");

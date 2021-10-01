@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.app;
 
+
+import br.senai.sp.jandira.lista.TipoConta;
 import br.senai.sp.jandira.model.Conta;
 
 public class App {
@@ -10,26 +12,38 @@ public class App {
 		Conta contaMaria = new Conta("7845-8"); 
 		// se não tiver o new não foi criado nada novo
 		
-		contaMaria.titular = "Maria Antonieta";
-		contaMaria.numeroAgencia = "4214-9";
+		contaMaria.titular ="Maria Antonieta";
+		contaMaria.setNumeroAgencia("4214-9");
 		contaMaria.depositar(500);
-		contaMaria.tipo = "Corrente";
+		contaMaria.setTipo(TipoConta.CORRENTE);
+		
+		System.out.println("");
+		System.out.println("---> " + contaMaria.getTipo());
+		System.out.println("---> " + contaMaria.getNumeroAgencia());
 		
 		// criação da conta do Pedro
 		Conta contaPedro = new Conta("6547-6");
 		
 		contaPedro.titular = "Pedro Cabral";
-		contaPedro.numeroAgencia = "4214-9";
+		contaPedro.setNumeroAgencia("4214-9");
 		contaPedro.depositar(200);
-		contaPedro.tipo = "Poupança";
+		contaPedro.setTipo(TipoConta.POUPANCA);
+		
+		System.out.println("");
+		System.out.println("---> " + contaPedro.getTipo());
+		System.out.println("---> " + contaPedro.getNumeroAgencia());
 		
 		// criação da conta da Ana
 		Conta contaAna = new Conta("23145-5");
 		
 		contaAna.titular = "Ana Gomes";
-		contaAna.numeroAgencia = "4214-9";
+		contaAna.setNumeroAgencia("4214-9");
 		contaAna.depositar(2000);
-		contaAna.tipo = "Corrente";
+		contaAna.setTipo(TipoConta.SALARIO);
+		
+		System.out.println("");
+		System.out.println("--->" + contaAna.getTipo());
+		System.out.println("---> " + contaAna.getNumeroAgencia());
 		
 		// exibir os detalhes das contas
 		
