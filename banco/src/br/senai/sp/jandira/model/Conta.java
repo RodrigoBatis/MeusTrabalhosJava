@@ -5,11 +5,11 @@ import br.senai.sp.jandira.lista.TipoConta;
 public class Conta {
 	
 	// Atributos da classe Conta
-	private String numeroAgencia;
+	private Agencia agencia;
 	private double saldo;
 	private TipoConta tipo;
 	private String numero;
-	public Cliente titular;
+	private Cliente titular;
 	
 	// Metodo Construtor
 	public Conta(String numeroConta) {
@@ -28,18 +28,21 @@ public class Conta {
 		return tipo;
 	}
 	
-	// set numero agencia
-	public void setNumeroAgencia(String numeroAgencia) {
-			
-		this.numeroAgencia = numeroAgencia;
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
 	}
 	
-	// get numero agencia
-	public String getNumeroAgencia() {
-		return numeroAgencia; 
+	public Agencia getAgencia() {
+		return this.agencia;
 	}
 	
+	public void setTitular(Cliente titular) {
+		this.titular = titular;
+	}
 	
+	public Cliente getTitular() {
+		return this.titular;
+	} 
 	
 	
 	// Metodos da classe Conta
@@ -99,9 +102,11 @@ public class Conta {
 	public void exibirDetalhes() {
 		System.out.println();
 		System.out.println("-----------------------------");
-		System.out.printf("Titular: %s\n", titular);
+		System.out.printf("Titular: %s\n", titular.getNome());
+		System.out.printf("E-mail: %s\n", titular.getEmail());
 		System.out.printf("Número: %s\n", numero);
-		System.out.printf("Agência: %s\n", numeroAgencia);
+		System.out.printf("Agência: %s\n", agencia.getAgencia());
+		System.out.printf("Gerente: %s\n", agencia.getGerente());
 		System.out.printf("Tipo: %s\n", tipo);
 		System.out.printf("Saldo: %s\n", saldo);
 	}
