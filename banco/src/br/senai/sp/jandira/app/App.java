@@ -79,8 +79,7 @@ public class App {
 		contaAna.exibirDetalhes();
 		
 		// Depositar 100 reais na conta da Maria
-		// Depositar 100 reais na conta da Maria
-		
+				
 		contaMaria.depositar(100);
 		contaMaria.exibirDetalhes();
 		
