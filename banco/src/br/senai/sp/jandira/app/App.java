@@ -33,7 +33,7 @@ public class App {
 		
 		System.out.println("");
 		System.out.println("---> " + contaMaria.getTipo());
-		System.out.println("---> " + contaMaria.getAgencia().getAgencia());
+		System.out.println("---> " + contaMaria.getAgencia().getNumero());
 		
 		// Criar o cliente Pedro
 		Cliente clientePedro = new Cliente();
@@ -52,7 +52,7 @@ public class App {
 		
 		System.out.println("");
 		System.out.println("---> " + contaPedro.getTipo());
-		System.out.println("---> " + contaPedro.getAgencia().getAgencia());
+		System.out.println("---> " + contaPedro.getAgencia().getNumero());
 		
 		// Criar a cliente Ana
 		Cliente clienteAna = new Cliente();
@@ -70,7 +70,7 @@ public class App {
 		
 		System.out.println("");
 		System.out.println("--->" + contaAna.getTipo());
-		System.out.println("---> " + contaAna.getAgencia().getAgencia());
+		System.out.println("---> " + contaAna.getAgencia().getNumero());
 		
 		// exibir os detalhes das contas
 		

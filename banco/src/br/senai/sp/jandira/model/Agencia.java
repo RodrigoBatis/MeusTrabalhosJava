@@ -27,7 +27,7 @@ public class Agencia {
 		this.numero = numero;
 	}
 	
-	public String getAgencia() {
+	public String getNumero() {
 		return this.numero;
 	}
 	

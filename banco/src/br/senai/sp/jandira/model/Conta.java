@@ -105,7 +105,7 @@ public class Conta {
 		System.out.printf("Titular: %s\n", titular.getNome());
 		System.out.printf("E-mail: %s\n", titular.getEmail());
 		System.out.printf("Número: %s\n", numero);
-		System.out.printf("Agência: %s\n", agencia.getAgencia());
+		System.out.printf("Agência: %s\n", agencia.getNumero());
 		System.out.printf("Gerente: %s\n", agencia.getGerente());
 		System.out.printf("Tipo: %s\n", tipo);
 		System.out.printf("Saldo: %s\n", saldo);
