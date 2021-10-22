@@ -2,6 +2,9 @@ package br.senai.sp.jandira.ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,7 +24,7 @@ public class Tela {
 		
 		JLabel lblTitulo = new JLabel();
 		lblTitulo.setText("Cálculo de IMC");
-		lblTitulo.setFont(new Font("Serif", Font.BOLD, 30));
+		lblTitulo.setFont(new Font("Serif", Font.BOLD, 40));
 		lblTitulo.setForeground(Color.BLUE);
 		lblTitulo.setBounds(30, 10, 300, 30);
 		
@@ -44,7 +47,9 @@ public class Tela {
 		
 		JButton btnCalcular = new JButton("CALCULAR");
 		btnCalcular.setFont(new Font("Serif", Font.BOLD, 20));
-		btnCalcular.setBounds(150, 270, 250, 50);
+		btnCalcular.setBackground(Color.LIGHT_GRAY);
+		btnCalcular.setForeground(Color.BLACK);
+		btnCalcular.setBounds(150, 260, 250, 70);
 		
 		JLabel lblResultado = new JLabel("Resultados: ");
 		lblResultado.setFont(new Font("Serif", Font.BOLD, 25));
@@ -55,13 +60,13 @@ public class Tela {
 		lblValorImc.setBounds(30, 420, 110, 30);
 		
 		JTextField txtValorImc = new JTextField();
-		txtValorImc.setBounds(150, 420, 100, 30);
+		txtValorImc.setBounds(150, 420, 200, 30);
 		
 		JLabel lblEstadoImc = new JLabel("Estado IMC: ");
 		lblEstadoImc.setBounds(30, 460, 110, 30);
 		
 		JTextField txtEstadoImc = new JTextField();
-		txtEstadoImc.setBounds(150, 460, 100, 30);
+		txtEstadoImc.setBounds(150, 460, 200, 30);
 		
 		telaImc.getContentPane().add(lblTitulo);
 		telaImc.getContentPane().add(lblPeso);
@@ -76,5 +81,37 @@ public class Tela {
 		telaImc.getContentPane().add(txtEstadoImc);
 		
 		telaImc.setVisible(true);
+		
+		btnCalcular.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String peso = txtPeso.getText();
+				String altura = txtAltura.getText();
+				
+				double valorPeso = Double.parseDouble(peso);
+				double valorAltura = Double.parseDouble(altura);
+				double resultado = valorPeso / (valorAltura * valorAltura);
+											
+				txtValorImc.setText(String.valueOf(resultado));
+				
+				
+				if(resultado <= 18.5) {
+					txtEstadoImc.setText("Abaixo do peso");
+				}else if(resultado > 18.5 && resultado <=24.9) {
+					txtEstadoImc.setText("Peso ideal (parabéns)");
+				}else if(resultado > 25.0 && resultado <= 29.9) {
+					txtEstadoImc.setText("Levemente acima do peso");
+				}else if(resultado > 30.0 && resultado <= 34.9) {
+					txtEstadoImc.setText("Obesidade grau 1");
+				}else if(resultado > 35.0 && resultado <= 39.9) {
+					txtEstadoImc.setText("Obesidade grau 2 (severa)");
+				}else{
+					txtEstadoImc.setText("Obesidade grau 3 (mórbida)");
+				}
+				
+			}
+		});
 	}
 }
