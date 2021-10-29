@@ -1,10 +1,12 @@
 package br.senai.sp.jandira.model;
 
+
 public class Tabuada {
 	
-	private double multiplicado;
-	private double multiplicadorMaximo;
-	private int contador = 0;
+	private int multiplicado;
+	private int multiplicadorMaximo;
+	
+	
 	
 	public void setMultiplicado(int multiplicado) {
 		this.multiplicado = multiplicado;
@@ -22,16 +24,18 @@ public class Tabuada {
 		return multiplicadorMaximo;
 	}
 	
-	
-	public void setCalcularTabuada(int calcularTabuada) {
-		while (contador < multiplicadorMaximo) {
-			 
-			contador++;
+	public String[]calcular(){
+		
+		String tabuada[] = new String[multiplicadorMaximo + 1];
+		
+		for (int index = 0; index <= multiplicadorMaximo; index++) {
+			int produto = multiplicado * index;
 			
-			double multiplicacao = getMultiplicado() *  getMultiplicadorMaximo();
-			
-			System.out.println(multiplicado + "X" + multiplicadorMaximo + "=" + multiplicacao);
-		} 
+			tabuada[index]= multiplicado + " X " + index + " = " + produto;
+		}
+		
+		return tabuada;
+		
 	}
 	
 	

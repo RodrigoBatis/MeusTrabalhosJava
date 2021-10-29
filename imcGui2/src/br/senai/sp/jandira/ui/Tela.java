@@ -94,6 +94,7 @@ public class Tela {
 				double valorAltura = Double.parseDouble(altura);
 				double resultado = valorPeso / (valorAltura * valorAltura);
 											
+				
 				txtValorImc.setText(String.valueOf(resultado));
 				
 				

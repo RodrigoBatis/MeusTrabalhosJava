@@ -2,19 +2,26 @@ package br.senai.sp.jandira.ui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JTextField;
+
 
 import br.senai.sp.jandira.model.Tabuada;
 
+
+
 public class TelaTabuada {
 	
-	Tabuada Novatabuada = new Tabuada();
+	Tabuada novaTabuada = new Tabuada();
 	
 	public void criarTela() {
+		
 		
 		JFrame telaTabuada = new JFrame();
 		telaTabuada.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,6 +40,7 @@ public class TelaTabuada {
 		JTextField txtMultiplicando = new JTextField();
 		txtMultiplicando.setBounds(175, 65, 75, 40);
 		
+		
 		JLabel lblMultiplicador = new JLabel(" Máximo multiplicador ");
 		lblMultiplicador.setBounds(40, 150 , 130, 30);
 		
@@ -42,10 +50,10 @@ public class TelaTabuada {
 		JLabel lblResultado = new JLabel("Resultado:");
 		lblResultado.setFont(new Font("Serif", Font.BOLD, 20));
 		lblResultado.setForeground(Color.BLUE);
-		lblResultado.setBounds(270, 65, 100, 30);
+		lblResultado.setBounds(320, 65, 100, 30);
 		
 		JTextField txtResultado = new JTextField();
-		txtResultado.setBounds(270, 100, 300, 270);
+		txtResultado.setBounds(320, 100, 200, 270);
 		
 		JButton btnCalcular = new JButton("Calcular");
 		btnCalcular.setFont(new Font("Serif", Font.BOLD, 30));
@@ -59,6 +67,8 @@ public class TelaTabuada {
 		btnLimpar.setForeground(Color.WHITE);
 		btnLimpar.setBounds(40, 320, 210, 50);
 		
+		
+		
 		telaTabuada.getContentPane().add(lblTitulo);
 		telaTabuada.getContentPane().add(lblMultiplicando);
 		telaTabuada.getContentPane().add(txtMultiplicando);
@@ -70,6 +80,25 @@ public class TelaTabuada {
 		telaTabuada.getContentPane().add(btnLimpar);
 		
 		telaTabuada.setVisible(true);
+		
+		btnCalcular.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		
+		btnLimpar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 	}
 	
 }
