@@ -115,10 +115,11 @@ public class TelaTabuada {
 				int multiplicado = Integer.parseInt(txtmultiplicando.getText());
 				int multiplicador = Integer.parseInt(txtMultiplicador.getText());
 				
-				Tabuada.setMultiplicado(multiplicado);
-				Tabuada.setMultiplicadorMaximo(multiplicador);
-				
+								
 				Tabuada novaTabuada = new Tabuada();
+				
+				novaTabuada.setMultiplicado(multiplicado);
+				novaTabuada.setMultiplicadorMaximo(multiplicador);
 				
 				String[] resultadoTabuada = novaTabuada.calcular();
 				
