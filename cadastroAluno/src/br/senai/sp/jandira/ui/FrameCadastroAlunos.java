@@ -4,6 +4,10 @@ package br.senai.sp.jandira.ui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -17,6 +21,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import br.senai.sp.jandira.model.Aluno;
 import br.senai.sp.jandira.model.Periodo;
@@ -81,9 +86,13 @@ public class FrameCadastroAlunos extends JFrame {
 		btnSalvar.setBounds(84, 154, 120, 48);
 		contentPane.add(btnSalvar);
 		
-		JLabel lblListaDe = new JLabel("Lista dos alunos:");
-		lblListaDe.setBounds(223, 30, 96, 14);
-		contentPane.add(lblListaDe);
+		JButton btnMostrarAlunos = new JButton("Exibir Alunos");
+		btnMostrarAlunos.setBounds(84, 216, 120, 23);
+		contentPane.add(btnMostrarAlunos);
+		
+		JLabel lblListaDeAluno = new JLabel("Lista dos alunos:");
+		lblListaDeAluno.setBounds(223, 30, 96, 14);
+		contentPane.add(lblListaDeAluno);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(223, 55, 188, 184);
@@ -100,6 +109,7 @@ public class FrameCadastroAlunos extends JFrame {
 		//Definir o modelAlunos como o model do nosso Jlist
 		listAlunos.setModel(modelAlunos);
 		
+		
 		//Criar uma turma que é um repositorio de alunos
 		AlunoRepository turma = new AlunoRepository(3);
 		
@@ -113,15 +123,68 @@ public class FrameCadastroAlunos extends JFrame {
 				aluno.setNome(txtNome.getText());
 				aluno.setMatricula(txtMatricula.getText());
 				
+				// definir horario que o aluno estuda 
+				
+				aluno.setPeriodo(determinarPeriodo(comboPeriodo.getSelectedIndex()));
+				
 				turma.gravar(aluno, posicao);
 				
 				posicao++;
 				
+				// adicionar 
 				modelAlunos.addElement(aluno.getNome());
 			 
-			 
+				if(posicao == turma.getTamanho()) {
+					btnSalvar.setEnabled(false);
+					JOptionPane.showMessageDialog(null, "Essa turma criada já está cheia", "Cheio", JOptionPane.WARNING_MESSAGE);
+				}
+				
+			}
+		});
+		
+		btnMostrarAlunos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				for (Aluno aluno : turma.listarTodos()) {
+					System.out.println(aluno.getMatricula());
+					System.out.println(aluno.getNome());
+					System.out.println(aluno.getPeriodo().getDescricao());
+					System.out.println("------------------------");
+				}
+				
+			}
+		});
+		
+		listAlunos.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				Aluno aluno = turma.listarAluno(listAlunos.getSelectedIndex());
+				txtMatricula.setText(aluno.getMatricula());
+				txtNome.setText(aluno.getNome());
+				comboPeriodo.setSelectedIndex(aluno.getPeriodo().ordinal());
 				
 			}
 		});
 	}
+	
+	
+	private Periodo determinarPeriodo(int periodoSelecionado) {
+		
+		if(periodoSelecionado == 0) {
+			return Periodo.MANHA;
+		} else if(periodoSelecionado == 1) {
+			return Periodo.TARDE;
+		}else if(periodoSelecionado == 2) {
+			return Periodo.NOITE;
+		}else if(periodoSelecionado == 3) {
+			return Periodo.SABADO;
+		}else {
+			return Periodo.ONLINE;
+		}
+	}
+	
 }
