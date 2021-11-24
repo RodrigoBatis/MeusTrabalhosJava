@@ -3,8 +3,14 @@ package br.senai.sp.jandira.model;
 public class Fabricante {
 		
 		private String nome;
-		private String inauguração;
+		private String anoInauguracao;
 		private String localizacao;
+		
+		public Fabricante(String nome, String localizacao, String anoInauguracao) {
+			this.nome = nome;
+			this.localizacao = localizacao;
+			this.anoInauguracao = anoInauguracao;
+		}
 		
 		public void setNome(String nome) {
 			this.nome = nome;
@@ -12,11 +18,11 @@ public class Fabricante {
 		public String getNome() {
 			return nome;
 		}
-		public void setInauguração(String inauguração) {
-			this.inauguração = inauguração;
+		public void setAnoInauguração(String anoInauguração) {
+			this.anoInauguracao = anoInauguração;
 		}
-		public String getInauguração() {
-			return inauguração;
+		public String getAnoInauguração() {
+			return anoInauguracao;
 		}
 		public void setLocalizacao(String localizacao) {
 			this.localizacao = localizacao;
@@ -24,8 +30,5 @@ public class Fabricante {
 		public String getLocalizacao() {
 			return localizacao;
 		}
-		
-		
-
-		
+				
 }

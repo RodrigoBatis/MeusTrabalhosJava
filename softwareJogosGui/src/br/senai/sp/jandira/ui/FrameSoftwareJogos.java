@@ -9,7 +9,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import br.senai.sp.jandira.model.Console;
+import br.senai.sp.jandira.model.Fabricante;
 import br.senai.sp.jandira.model.Jogo;
+import br.senai.sp.jandira.repository.FabricantesRepository;
 
 import javax.swing.JButton;
 import java.awt.Color;
@@ -114,10 +116,22 @@ public class FrameSoftwareJogos extends JFrame {
 		lblMeusJogos.setBounds(301, 61, 108, 18);
 		contentPane.add(lblMeusJogos);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBackground(new Color(255, 255, 255));
-		comboBox_1.setBounds(120, 136, 150, 22);
-		contentPane.add(comboBox_1);
+		JComboBox comboFabricante = new JComboBox();
+		DefaultComboBoxModel<String> modelFabricantes = new DefaultComboBoxModel<String>();
+
+		FabricantesRepository fabricantes = new FabricantesRepository();
+
+		for (Fabricante fabricante : fabricantes.getFabricantes()) {
+			modelFabricantes.addElement(fabricante.getNome());
+		}
+
+		comboFabricante.setModel(modelFabricantes);
+		contentPane.add(comboFabricante);
+
+		
+		comboFabricante.setBackground(new Color(255, 255, 255));
+		comboFabricante.setBounds(120, 136, 150, 22);
+		contentPane.add(comboFabricante);
 		
 		JButton btnVoltar = new JButton("<");
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -166,22 +180,41 @@ public class FrameSoftwareJogos extends JFrame {
 		scrollPane.setBounds(301, 91, 223, 249);
 		contentPane.add(scrollPane);
 		
-		JLabel lblFundo = new JLabel("New label");
+		JLabel lblFundo = new JLabel("");
 		lblFundo.setIcon(new ImageIcon(FrameSoftwareJogos.class.getResource("/br/senai/sp/jandira/ui/img/imagem-fundo.jpg")));
 		lblFundo.setBounds(0, 0, 534, 427);
 		contentPane.add(lblFundo);
+		
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				Jogo jogo = new Jogo();
-				jogo.setTitulo(txtTitulo.getText());
-				jogo.setObservacao(txtObservacao.getText());
+			Jogo jogo = new Jogo();
+			
+			jogo.setTitulo(txtTitulo.getText());
+			
+			}
+		});
+		
+		btnProximo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 				
 				
 			}
 		});
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
 	}
 }
