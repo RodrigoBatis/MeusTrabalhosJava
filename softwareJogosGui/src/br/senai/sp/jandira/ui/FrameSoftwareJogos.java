@@ -3,25 +3,32 @@ package br.senai.sp.jandira.ui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 import br.senai.sp.jandira.model.Console;
 import br.senai.sp.jandira.model.Fabricante;
 import br.senai.sp.jandira.model.Jogo;
 import br.senai.sp.jandira.repository.FabricantesRepository;
+import br.senai.sp.jandira.repository.JogosRepository;
 
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 
@@ -31,6 +38,7 @@ public class FrameSoftwareJogos extends JFrame {
 	private JTextField txtTitulo;
 	private JTextField txtValor;
 	private JTextField txtObservacao;
+	private int posicao;
 
 	public FrameSoftwareJogos() {
 		setBackground(new Color(0, 0, 204));
@@ -58,11 +66,11 @@ public class FrameSoftwareJogos extends JFrame {
 		lblFabricante.setBounds(43, 140, 67, 14);
 		contentPane.add(lblFabricante);
 		
-		JCheckBox chckbxZerado = new JCheckBox("Zerado");
-		chckbxZerado.setBackground(new Color(255, 255, 255));
-		chckbxZerado.setFont(new Font("Arial Black", Font.PLAIN, 11));
-		chckbxZerado.setBounds(120, 164, 97, 23);
-		contentPane.add(chckbxZerado);
+		JCheckBox checkBoxZerado = new JCheckBox("Zerado");
+		checkBoxZerado.setBackground(new Color(255, 255, 255));
+		checkBoxZerado.setFont(new Font("Arial Black", Font.PLAIN, 11));
+		checkBoxZerado.setBounds(120, 164, 97, 23);
+		contentPane.add(checkBoxZerado);
 		
 		JLabel lblConsole = new JLabel("Console:");
 		lblConsole.setFont(new Font("Arial Black", Font.PLAIN, 11));
@@ -180,11 +188,16 @@ public class FrameSoftwareJogos extends JFrame {
 		scrollPane.setBounds(301, 91, 223, 249);
 		contentPane.add(scrollPane);
 		
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		JList listJogos = new JList(listModel);
+		scrollPane.setViewportView(listJogos);
+		
 		JLabel lblFundo = new JLabel("");
 		lblFundo.setIcon(new ImageIcon(FrameSoftwareJogos.class.getResource("/br/senai/sp/jandira/ui/img/imagem-fundo.jpg")));
 		lblFundo.setBounds(0, 0, 534, 427);
 		contentPane.add(lblFundo);
 		
+		JogosRepository colecao = new JogosRepository(10);
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			
@@ -194,7 +207,41 @@ public class FrameSoftwareJogos extends JFrame {
 			Jogo jogo = new Jogo();
 			
 			jogo.setTitulo(txtTitulo.getText());
+			jogo.setFabricante(fabricantes.listarFabricante(comboFabricante.getSelectedIndex()));
+			jogo.setZerado(checkBoxZerado.isSelected());
+			jogo.setConsole(Console.values()[comboConsole.getSelectedIndex()]);
+			jogo.setValor(txtValor.getText());
+			jogo.setObservacao(txtObservacao.getText());
 			
+			colecao.gravar(jogo, posicao);
+			posicao++;
+			
+			listModel.addElement(jogo.getTitulo());
+			
+			if(posicao == colecao.getTamanho()) {
+				btnSalvar.setEnabled(false);
+				JOptionPane.showMessageDialog(null, "Esta coleção atingiu o limite de jogos", "Cheio", JOptionPane.WARNING_MESSAGE);
+			}
+			}
+		});
+		
+		listJogos.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				
+				Jogo jogo = colecao.listarJogo(listJogos.getSelectedIndex());
+				txtTitulo.setText(jogo.getTitulo());
+				comboFabricante.setSelectedIndex(Arrays.asList(fabricantes.getFabricantes()).indexOf(jogo.getFabricante()));
+				checkBoxZerado.setSelected(jogo.getZerado());
+				comboConsole.setSelectedIndex(jogo.getConsole().ordinal());
+				txtValor.setText(jogo.getValor());;	
+				txtObservacao.setText(jogo.getObservacao());
+
+				
+				btnVoltar.setEnabled(true);
+				btnProximo.setEnabled(true);
+				
 			}
 		});
 		
@@ -203,6 +250,15 @@ public class FrameSoftwareJogos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				int posicaoList = listJogos.getSelectedIndex();
+				
+				if(posicaoList == listJogos.getLastVisibleIndex()) {
+					listJogos.setSelectedIndex(listJogos.getFirstVisibleIndex());
+				}
+				
+				else {
+					listJogos.setSelectedIndex(posicaoList+1);
+				}
 				
 			}
 		});
@@ -212,6 +268,15 @@ public class FrameSoftwareJogos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				int posicaoList = listJogos.getSelectedIndex();
+				
+				if(posicaoList == listJogos.getFirstVisibleIndex()) {
+					listJogos.setSelectedIndex(listJogos.getLastVisibleIndex());
+				}
+				
+				else {
+					listJogos.setSelectedIndex(posicaoList-1);
+				}
 				
 			}
 		});

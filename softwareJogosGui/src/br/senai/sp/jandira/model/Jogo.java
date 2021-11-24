@@ -41,12 +41,14 @@ public class Jogo {
 			return console;
 		}
 		
-		public void setValor(double valor) {
+		public void setValor(String valorString) {
+			double valor = Double.parseDouble(valorString);
 			this.valor = valor;
 		}
 		
-		public double getValor() {
-			return valor;
+		public String getValor() {
+			String valorString = String.valueOf(this.valor);
+			return valorString;
 		}
 		
 		public void setObservacao(String observacao) {

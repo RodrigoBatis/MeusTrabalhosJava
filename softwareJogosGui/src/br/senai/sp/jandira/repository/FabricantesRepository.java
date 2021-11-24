@@ -8,7 +8,7 @@ public class FabricantesRepository {
 	
 	public FabricantesRepository() {
 		
-		this.listaFabricantes = new Fabricante[7];
+		this.listaFabricantes = new Fabricante[8];
 		
 		listaFabricantes[0] = new Fabricante("Sony","Tóquio-Japão", "1946");
 		listaFabricantes[1]	= new Fabricante("Nintendo","Kyoto-Japão","1889");
@@ -17,6 +17,7 @@ public class FabricantesRepository {
 		listaFabricantes[4] = new Fabricante("EPIC Games","Cary, Carolina do Norte-EUA","1991");
 		listaFabricantes[5] = new Fabricante("Bandai Namco", "Tóquio-Japão", "2005");
 		listaFabricantes[6] = new Fabricante("Tencent", "Shenzhen-China", "1998");
+		listaFabricantes[7] = new Fabricante("Konami", "Tóquio-Japão", "1969");
 	}
 	
 	public Fabricante[] getFabricantes() {
