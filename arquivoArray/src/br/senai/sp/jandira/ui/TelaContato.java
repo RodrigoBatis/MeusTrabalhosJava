@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class TelaContato extends JFrame {
@@ -40,6 +41,8 @@ public class TelaContato extends JFrame {
 		
 		// Configura o caminho do arquivo
 		caminho = "Z:\\Contato\\Contatos.txt";
+		
+		
 		
 		// Exibe o total de contatos cadastrados
 		objDadosContato.listarContatos();
@@ -115,8 +118,7 @@ public class TelaContato extends JFrame {
 		contentPane.add(lblTotal);
 		btnCadastar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				/***** ação botão cadastrar *****/
+								
 				
 				// Receber os dados digitados:
 				objContato.setNome(txtNome.getText());
@@ -124,13 +126,27 @@ public class TelaContato extends JFrame {
 				objContato.setTelefone(txtTelefone.getText());
 				objContato.setCidade(txtCidade.getText());
 				
-				//Tratando os dados para um arquivo de texto
+				ArrayList<Contato> contatos = new ArrayList<Contato>();
+				objDadosContato = objArquivo.ler(caminho);
+				contatos = objDadosContato.listarContatos();
+				
+				contatos.forEach(contato->{
+					
+					System.out.println("NOME: " + contato.getNome() + " E-MAIL: " + contato.getEmail() + " TELEFONE: " + contato.getTelefone() + " CIDADE: " + contato.getCidade());
+					
+				});
+				
+				objDadosContato.cadastrarContato(objContato);
+				
+				
+				
+				/*Tratando os dados para um arquivo de texto
 				String texto = "";
 				texto = objContato.getNome() + ";" +objContato.getEmail() + ";" + objContato.getTelefone() + ";" + objContato.getCidade();
 				
-				//System.out.println(texto);
+				System.out.println(texto);*/
 				
-				objArquivo.escrever(caminho, texto);
+				//objArquivo.escrever(caminho, texto);
 			}
 		});
 	}

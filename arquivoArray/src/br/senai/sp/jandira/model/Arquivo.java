@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 
 
 public class Arquivo {
+	
+	DadosContatos objDadosContato = new DadosContatos();
 
 	public boolean escrever(String caminho, String conteudo) {
 		
@@ -33,40 +35,52 @@ public class Arquivo {
 		
 	}
 	
-	public String ler(String caminho) {
+	public DadosContatos ler(String caminho) {
 		
 		String conteudo = "";
 		
 		try {
 			// Abre o arquivo
 			FileReader arquivo = new FileReader(caminho);
+			
 			// Armazena o conteudo do arquivo em memoria 
 			BufferedReader conteudoArquivo = new BufferedReader(arquivo);
 			
 			//recupera os dados do arquivo
+			
 			try {
 			String linha = "";
 			linha = conteudoArquivo.readLine();
 			
 			while(linha != null) {
 				
+				Contato objContato = new Contato();
+				
+				String[] vetLinha = linha.split(";");
+				
+				objContato.setNome(vetLinha[0]);
+				objContato.setEmail(vetLinha[1]);
+				objContato.setTelefone(vetLinha[2]);
+				objContato.setCidade(vetLinha[3]);
+				
+				objDadosContato.cadastrarContato(objContato);
+				
 				//conteudo = conteudo + linha;
-				conteudo += linha;
 				linha = conteudoArquivo.readLine();
 				
 			}
 			
 			conteudoArquivo.close();
-			return conteudo;
+			return objDadosContato;
 			
 			}catch(IOException e) {
 				System.out.println("ERRO: " + e.getMessage());
-				return "";
+				return null;
 			}
 		}catch(FileNotFoundException e) {
 			
 			System.out.println("ERRO: " + e.getMessage());
-			return "";
+			return null;
 		}
 		
 	}
