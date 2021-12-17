@@ -116,6 +116,7 @@ public class TelaContato extends JFrame {
 		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblTotal.setBounds(400, 85, 46, 14);
 		contentPane.add(lblTotal);
+		
 		btnCadastar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 								
@@ -135,6 +136,7 @@ public class TelaContato extends JFrame {
 					System.out.println("NOME: " + contato.getNome() + " E-MAIL: " + contato.getEmail() + " TELEFONE: " + contato.getTelefone() + " CIDADE: " + contato.getCidade());
 					
 				});
+				
 				
 				objDadosContato.cadastrarContato(objContato);
 				
